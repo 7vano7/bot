@@ -8,13 +8,13 @@ const chatId = '372747249';
 
 const serverList = [
     {
-        'server': 'https://google.com',
+        'domain': 'https://google.com',
         'action': '/test',
         'method': 'get',
         'data': '',
     },
     {
-        'server': 'https://ezrust.com',
+        'domain': 'https://ezrust.com',
         'action': '/login',
         'method': 'get',
         'data': '',
@@ -31,7 +31,7 @@ function parseSites() {
     serverList.forEach(function (key, obj) {
         axios({
             method: obj.method,
-            url: toString(obj.server + obj.action),
+            url: toString(obj.domain + obj.action),
             data: obj.data
         }).then(res => {
             // console.log(res.data);
@@ -54,18 +54,19 @@ bot.on('text', async (ctx) => {
         const text = ctx.message.text;
         serverList.forEach(function (obj, key) {
             if(text == list) {
+                let {domain, action, method, data} = obj;
                 let format = `
-                    domain: ${obj.server},
-                    action: ${obj.action},
-                    method: ${obj.method},
-                    data: ${obj.data},
+                    domain: ${domain},
+                    action: ${action},
+                    method: ${method},
+                    data: ${data},
                 `;
                 ctx.reply(format);
             }
-            else if (text == toString(obj.server + obj.action)) {
+            else if (text == toString(obj.domain + obj.action)) {
                 axios({
                     method: obj.method,
-                    url: toString(obj.server + obj.action),
+                    url: toString(obj.domain + obj.action),
                     data: obj.data
                 }).then(res => {
                     // console.log(res.data);
