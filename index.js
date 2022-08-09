@@ -24,7 +24,7 @@ const serverList = [
 const list = '/list';
 
 
-//setInterval(parseSites, 10000);
+setInterval(parseSites, 10000);
 
 function parseSites() {
     // bot.telegram.sendMessage(chartId, 'sfsdf');
