@@ -31,7 +31,7 @@ function parseSites() {
     serverList.forEach(function (key, obj) {
         axios({
             method: obj.method,
-            url: obj.server + obj.action,
+            url: toString(obj.server + obj.action),
             data: obj.data
         }).then(res => {
             // console.log(res.data);
@@ -62,10 +62,10 @@ bot.on('text', async (ctx) => {
                 `;
                 ctx.reply(format);
             }
-            else if (text == obj.server + obj.action) {
+            else if (text == toString(obj.server + obj.action)) {
                 axios({
                     method: obj.method,
-                    url: obj.server + text,
+                    url: toString(obj.server + obj.action),
                     data: obj.data
                 }).then(res => {
                     // console.log(res.data);
