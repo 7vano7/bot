@@ -1,57 +1,45 @@
-const { Telegraf } = require('telegraf');
+const {Telegraf} = require('telegraf');
 const https = require('https');
 const axios = require('axios');
 
 const bot = new Telegraf('5568674047:AAG56xftwRL8JafP6o7LXtolEcMyAJnWqaw')
 
-const chartId = '372747249';
+const chatId = '372747249';
 
-let serverList = [
+const serverList = [
     {
-        'server':'https//:google.com',
+        'server': 'https://google.com',
         'action': '/test',
-        'method':'get',
-        'data':'',
+        'method': 'get',
+        'data': '',
     },
     {
-        'server':'https//:ezrust.com',
+        'server': 'https://ezrust.com',
         'action': '/login',
-        'method':'get',
-        'data':'',
+        'method': 'get',
+        'data': '',
     }
 ];
 
-let serverListCheck = [
-    {
-        'server':'https//:google.com',
-    },
-    {
-        'server':'https//:ezrust.com',
-    }
-];
-
-let actions = [
-    '/get-status',
-    '/get-eth-status'
-];
+const list = '/list';
 
 
-setInterval(parseSites, 10000);
+//setInterval(parseSites, 10000);
 
 function parseSites() {
     // bot.telegram.sendMessage(chartId, 'sfsdf');
     serverList.forEach(function (key, obj) {
         axios({
             method: obj.method,
-            url: obj.server+obj.action,
+            url: obj.server + obj.action,
             data: obj.data
         }).then(res => {
             // console.log(res.data);
 
             // check something condition
 
-            //send message to chart
-            bot.telegram.sendMessage(chartId, res.data);
+            //send message to chat
+            bot.telegram.sendMessage(chatId, res.data);
 
         })
             .catch(error => {
@@ -60,16 +48,25 @@ function parseSites() {
     });
 }
 
-bot.start( ctx => ctx.reply(`"Hello!"`))
+bot.start(ctx => ctx.reply(`"Hello!"`))
 bot.on('text', async (ctx) => {
     try {
         const text = ctx.message.text;
-        if(actions.includes(text)) {
-            serverListCheck.forEach(function (key, obj) {
+        serverList.forEach(function (obj, key) {
+            if(text == list) {
+                let format = `
+                    domain: ${obj.server},
+                    action: ${obj.action},
+                    method: ${obj.method},
+                    data: ${obj.data},
+                `;
+                ctx.reply(format);
+            }
+            else if (text == obj.server + obj.action) {
                 axios({
-                    method: 'get',
-                    url: obj.server+text,
-                    // data: data
+                    method: obj.method,
+                    url: obj.server + text,
+                    data: obj.data
                 }).then(res => {
                     // console.log(res.data);
                     ctx.reply(res.status);
@@ -78,10 +75,10 @@ bot.on('text', async (ctx) => {
                     .catch(error => {
                         console.error(error);
                     });
-            });
-        }
-
-    } catch(e) {
+            }
+        });
+    } catch
+        (e) {
         ctx.reply("Error");
     }
 })
