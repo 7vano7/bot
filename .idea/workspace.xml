@@ -27,7 +27,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/var/www/node&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/var/www/golden&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -41,7 +41,8 @@
       <option name="presentableId" value="Default" />
       <updated>1659990516845</updated>
       <workItem from="1659990518017" duration="14064000" />
-      <workItem from="1660078526706" duration="941000" />
+      <workItem from="1660078526706" duration="1018000" />
+      <workItem from="1660079596959" duration="22000" />
     </task>
     <servers />
   </component>
