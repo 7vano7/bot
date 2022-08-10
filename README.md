@@ -26,7 +26,7 @@ show server detail list
 
 manual check server status
 ```
-/domain/action
+domain/action
 ```
 
 where
